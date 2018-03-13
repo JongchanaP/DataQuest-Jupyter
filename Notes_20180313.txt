@@ -1,0 +1,51 @@
+from mpl_toolkits.basemap import Basemap
+m = Basemap(
+    projection='merc', 
+    llcrnrlat=40.496044, 
+    urcrnrlat=40.915256, 
+    llcrnrlon=-74.255735, 
+    urcrnrlon=-73.700272,
+    resolution='i'
+)
+
+m.drawmapboundary(fill_color='#85A6D9')
+m.drawcoastlines(color='#6D5F47', linewidth=.4)
+m.drawrivers(color='#6D5F47', linewidth=.4)
+
+longitudes = combined["lon"].tolist()
+latitudes = combined["lat"].tolist()
+# c : convert the sequence of number to color
+# cmap : colormap
+m.scatter(longitudes,latitudes,s=20,zorder=2,latlon=True,c=combined["ell_percent"],cmap="summer")
+
+plt.show()
+
+
+
+
+import numpy as np
+districts = combined.groupby("school_dist").agg(np.mean)
+districts.reset_index(inplace=True)
+districts.head(3)
+
+from mpl_toolkits.basemap import Basemap
+m = Basemap(
+    projection='merc', 
+    llcrnrlat=40.496044, 
+    urcrnrlat=40.915256, 
+    llcrnrlon=-74.255735, 
+    urcrnrlon=-73.700272,
+    resolution='i'
+)
+
+m.drawmapboundary(fill_color='#85A6D9')
+m.drawcoastlines(color='#6D5F47', linewidth=.4)
+m.drawrivers(color='#6D5F47', linewidth=.4)
+
+longitudes = districts["lon"].tolist()
+latitudes = districts["lat"].tolist()
+# c : convert the sequence of number to color
+# cmap : colormap
+m.scatter(longitudes,latitudes,s=20,zorder=2,latlon=True,c=districts["ell_percent"],cmap="summer")
+
+plt.show()
